@@ -1,2 +1,4 @@
 venv/ 
 config/.env
+data/quotes.txt
+data/summaries.txt

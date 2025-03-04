@@ -26,9 +26,9 @@ def send_email(subject, body, recipient):
             server.starttls()
             server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             server.sendmail(EMAIL_ADDRESS, recipient, msg.as_string())
-        print("✅ Email sent successfully!")
+        print("Email sent successfully!")
     except Exception as e:
-        print(f"❌ Error sending email: {e}")
+        print(f"Error sending email: {e}")
 
 if __name__ == "__main__":
     # Get random quote and book summary
@@ -36,7 +36,11 @@ if __name__ == "__main__":
     summary = get_random_summary("data/summaries.txt")
 
     # Format email body
-    email_body = f"📖 *Daily Knowledge Boost*\n\n✏️ *Quote of the Day:*\n{quote}\n\n📚 *Book Summary:*\n{summary}"
+    email_body = f"""
+            Daily Knowledge Boost\n\n
+            Quote of the Day:\n{quote}\n\n\n\n
+            Book Summary:\n{summary}
+        """
 
     # Send the email
     send_email("Daily Knowledge Boost", email_body, "ggallitz03@icloud.com")
