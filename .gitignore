@@ -1,1 +1,2 @@
-venv/ # Falls nicht automatisch drin
+venv/ 
+config/.env
