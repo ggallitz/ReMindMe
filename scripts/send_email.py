@@ -2,9 +2,10 @@ import smtplib
 import os
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
+from fetch_content import get_random_line, get_random_summary  
 
 # Load .env file
-dotenv_path = "/Users/georg/Desktop/projects/remindme/config/.env"
+dotenv_path = os.path.join(os.path.dirname(__file__), "../config/.env")
 load_dotenv(dotenv_path)
 
 # Load environment variables
@@ -29,6 +30,13 @@ def send_email(subject, body, recipient):
     except Exception as e:
         print(f"❌ Error sending email: {e}")
 
-# Example usage
 if __name__ == "__main__":
-    send_email("Daily Reminder", "This is your knowledge boost for today!", "ggallitz03@icloud.com")
+    # Get random quote and book summary
+    quote = get_random_line("data/quotes.txt")
+    summary = get_random_summary("data/summaries.txt")
+
+    # Format email body
+    email_body = f"📖 *Daily Knowledge Boost*\n\n✏️ *Quote of the Day:*\n{quote}\n\n📚 *Book Summary:*\n{summary}"
+
+    # Send the email
+    send_email("Daily Knowledge Boost", email_body, "ggallitz03@icloud.com")
